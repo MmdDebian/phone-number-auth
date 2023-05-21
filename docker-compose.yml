@@ -1,0 +1,29 @@
+version: '3.0'
+services:
+  
+  # the nestjs app  
+  app:
+    build: 
+        context : .
+        dockerfile : docker/Dockerfile
+    container_name: phone-number-auth
+    image : phone-number-auth 
+    restart: always
+    env_file: ./.env
+    ports:
+      - "3000:3000"
+  
+  mysql:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'auth'
+      MYSQL_USERNAME: 'root'
+      MYSQL_PASSWORD: ''
+      MYSQL_ROOT_PASSWORD: 'your-root-password'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - my-db:/var/lib/mysql
