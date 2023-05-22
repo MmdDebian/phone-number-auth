@@ -56,7 +56,7 @@ export class AuthService {
             const { phoneNumber } = loginDto ;
 
             // check user exist
-            const userInDb = await this.userService.findByPhoneNumber(phoneNumber);
+            const userInDb = await this.userService.findOne({phoneNumber});
 
 
             // get for user register
@@ -80,7 +80,7 @@ export class AuthService {
 
     async verify(verifyDto:VerifyDto):Promise<{access_token : string }>{
         const { phoneNumber , otpCode } = verifyDto ;
-        const user = await this.userService.findByPhoneNumber(phoneNumber);
+        const user = await this.userService.findOne({phoneNumber});
 
         if(!user){
             throw new BadRequestException('phone number is invalid')

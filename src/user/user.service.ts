@@ -21,17 +21,11 @@ export class UserService {
     async findOne(where : Where):Promise<UserEntity>{
         return await this.userRepo.findOne({where}) ;
     }
-
-    async findByPhoneNumber(phoneNumber:string):Promise<UserEntity>{
-        return await this.userRepo.findOneBy({phoneNumber});
-    }
     
     async create(createUserDto:CreateUserDto):Promise<UserEntity>{
         const {phoneNumber} = createUserDto ;
         
-        const userInDb = await this.userRepo.findOne({
-            where : { phoneNumber }
-        })
+        const userInDb = await this.findOne({phoneNumber});
 
         if(userInDb){
             throw new BadRequestException('user alredy exist')

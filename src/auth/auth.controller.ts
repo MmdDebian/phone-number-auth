@@ -1,5 +1,4 @@
 import { BadRequestException, Body, Controller, Post } from '@nestjs/common';
-import { SmsService } from 'src/sms/sms.service';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { VerifyDto } from './dto/verify.dto';
