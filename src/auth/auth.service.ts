@@ -1,8 +1,10 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { OtpService } from 'src/otp/otp.service';
 import { statusResult } from 'src/shared/statusResult/statusResult';
 import { SmsService } from 'src/sms/sms.service';
+import { UserEntity } from 'src/user/user.entity';
 import { UserService } from 'src/user/user.service';
 import { LoginDto } from './dto/login.dto';
 import { VerifyDto } from './dto/verify.dto';
@@ -15,16 +17,11 @@ export class AuthService {
         private readonly jwtService:JwtService ,
         private readonly smsService:SmsService  ,
         private readonly otpService:OtpService ,
+        private readonly configService:ConfigService ,
     ){}
 
     private async _signToken(payload:JwtPayload):Promise<string>{
-        return await this.jwtService.sign(
-            payload , 
-            {
-                secret : 'secret' , 
-                expiresIn : '1h'
-            }
-        )
+        return await this.jwtService.sign(payload);
     }
 
     
@@ -93,8 +90,19 @@ export class AuthService {
             throw new BadRequestException('otp code is invalid')
         }
 
-
+        
         const token = await this._signToken({sub : user.id});
         return { access_token : token}
+    }
+
+    async validateUser(payload:JwtPayload):Promise<UserEntity>{
+        const { sub } = payload ;
+        const user = this.userService.findOne({id :  sub});
+
+        if(!user){
+            throw new BadRequestException('Invalid token')
+        }
+
+        return user ; 
     }
 }
