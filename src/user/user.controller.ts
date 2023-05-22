@@ -11,8 +11,8 @@ export class UserController {
         private readonly userService : UserService  ,
     ){}
 
-    @Get()
-    async findAll(){
-        return this.userService.findAll()
-    }
+    // @Get()
+    // async findAll(){
+    //     return this.userService.findAll()
+    // }
 }
