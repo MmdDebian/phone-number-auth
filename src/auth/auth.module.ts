@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
-import { OtpModule } from 'src/otp/otp.module';
+import { OtpModule } from 'src/auth/otp/otp.module';
 import { SmsModule } from 'src/sms/sms.module';
 import { UserModule } from 'src/user/user.module';
 import { AuthController } from './auth.controller';

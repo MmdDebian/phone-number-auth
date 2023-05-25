@@ -5,7 +5,7 @@ import { AuthModule } from './auth/auth.module';
 import { DatabaseModule } from './config/database.module';
 import { UserModule } from './user/user.module';
 import { SmsModule } from './sms/sms.module';
-import { OtpModule } from './otp/otp.module';
+import { OtpModule } from './auth/otp/otp.module';
 import { ProfileModule } from './profile/profile.module';
 import { ConfigModule } from '@nestjs/config';
 

@@ -1,8 +1,8 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import { OtpService } from 'src/otp/otp.service';
-import { statusResult } from 'src/shared/statusResult/statusResult';
+import { OtpService } from 'src/auth/otp/otp.service';
+import { statusResult } from 'src/shared/status-result/status-result';
 import { SmsService } from 'src/sms/sms.service';
 import { UserEntity } from 'src/user/user.entity';
 import { UserService } from 'src/user/user.service';
